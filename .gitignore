@@ -19,3 +19,8 @@
 
 # Go workspace file
 go.work
+
+# My settings shouldn't be your settings
+.vscode
+
+/data/*.dat

@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+    app:
+        container_name: app
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: development
+            args:
+                - GO_VERSION=1.21-alpine
+        volumes:
+            - ./app:/srv/app
+            - ./data:/srv/data
