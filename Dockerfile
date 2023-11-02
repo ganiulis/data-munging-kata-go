@@ -13,4 +13,6 @@ FROM production AS development
 
 RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.5/zsh-in-docker.sh)"
 
+RUN go get golang.org/x/tools/cmd/godoc && go install golang.org/x/tools/cmd/godoc
+
 CMD tail -f /dev/null

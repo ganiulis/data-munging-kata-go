@@ -1,8 +1,6 @@
 # data-munging-kata-go
 Data Munging exercise written in Go. Found at http://codekata.com/kata/kata04-data-munging/.
 
-
-
 # Installation
 ## Prerequisites
 You need some things:
@@ -33,4 +31,13 @@ go run main.go
 
 docker compose down
 
+# Start the container without rebuilding it
+
+docker compose up -d
+
 ```
+
+# Sources
+My gratitude goes to these articles:
+1. https://medium.com/learning-the-go-programming-language/streaming-io-in-go-d93507931185
+2. https://betterprogramming.pub/naming-conventions-in-go-short-but-descriptive-1fa7c6d2f32a?gi=2b021845ccf8

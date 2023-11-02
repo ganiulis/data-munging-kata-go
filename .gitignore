@@ -2,25 +2,25 @@
 # https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
 #
 # Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
+app/*.exe
+app/*.exe~
+app/*.dll
+app/*.so
+app/*.dylib
 
 # Test binary, built with `go test -c`
-*.test
+app/*.test
 
 # Output of the go coverage tool, specifically when used with LiteIDE
-*.out
+app/*.out
 
 # Dependency directories (remove the comment below to include it)
-# vendor/
+app/vendor/
 
 # Go workspace file
-go.work
+app/go.work
 
 # My settings shouldn't be your settings
 .vscode
 
-/data/*.dat
+data/*.dat
