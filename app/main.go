@@ -20,58 +20,55 @@ func main() {
 
 	scanner := bufio.NewScanner(file)
 
-	var smallestSpreadPtr *Weather
+	var selectedEntry *WeatherEntry
 
 	for scanner.Scan() {
 		row := strings.Join(strings.Fields(scanner.Text()), " ")
+		columns := strings.Split(row, " ")
 
-		if weatherPtr, err := denormalizeWeather(row); err == nil {
-			if smallestSpreadPtr == nil {
-				smallestSpreadPtr = weatherPtr
+		if entry, err := denormalize(columns); err == nil {
+			if selectedEntry == nil {
+				selectedEntry = entry
 
 				continue
 			}
 
-			if weather := *weatherPtr; weather.spread < smallestSpreadPtr.spread {
-				smallestSpreadPtr = &weather
+			if entry.spread < selectedEntry.spread {
+				selectedEntry = entry
 			}
 		}
 	}
 
-	smallestSpread := *smallestSpreadPtr
-
-	fmt.Println(smallestSpread)
+	fmt.Printf("Smallest spread is on day %d.\n", selectedEntry.day)
 }
 
-func denormalizeWeather(row string) (*Weather, error) {
-	columns := strings.Split(row, " ")
-
-	if len(columns) < 2 {
+func denormalize(data []string) (*WeatherEntry, error) {
+	if len(data) < 2 {
 		return nil, errors.New("Could not parse column")
 	}
 
-	day, err := strconv.Atoi(columns[0])
+	day, err := strconv.Atoi(data[0])
 
 	if err != nil {
 		return nil, errors.New("Could not parse day")
 	}
 
-	maxTemp, err := strconv.Atoi(columns[1])
+	maxTemp, err := strconv.Atoi(data[1])
 
 	if err != nil {
 		return nil, errors.New("Could not parse maxTemp")
 	}
 
-	minTemp, err := strconv.Atoi(columns[2])
+	minTemp, err := strconv.Atoi(data[2])
 
 	if err != nil {
 		return nil, errors.New("Could not parse minTemp")
 	}
 
-	return &Weather{day: day, spread: maxTemp - minTemp}, nil
+	return &WeatherEntry{day: day, spread: maxTemp - minTemp}, nil
 }
 
-type Weather struct {
+type WeatherEntry struct {
 	day    int
 	spread int
 }
