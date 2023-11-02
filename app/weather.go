@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func outputSmallestSpread(file *os.File) {
+func OutputSmallestSpread(file *os.File) {
 	scanner := bufio.NewScanner(file)
 
 	var selectedEntry *WeatherEntry
