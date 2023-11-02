@@ -28,4 +28,9 @@ docker exec -it app /bin/zsh
 # Inside the shell
 
 go run main.go
+
+# Stop the container
+
+docker compose down
+
 ```
