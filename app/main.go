@@ -2,15 +2,12 @@ package main
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
-
-type Weather struct {
-	dy  string
-	mxt string
-}
 
 func main() {
 	file, err := os.Open("../data/weather.dat")
@@ -24,15 +21,46 @@ func main() {
 	scanner := bufio.NewScanner(file)
 
 	for scanner.Scan() {
-		line := strings.Join(strings.Fields(scanner.Text()), " ")
-		words := strings.Split(line, " ")
+		row := strings.Join(strings.Fields(scanner.Text()), " ")
 
-		if len(words) != 15 {
-			continue
+		if weatherPtr, err := denormalizeWeather(row); err == nil {
+			weather := *weatherPtr
+
+			fmt.Println(weather)
 		}
-
-		weather := Weather{dy: words[0], mxt: words[1]}
-
-		fmt.Println(weather)
 	}
+}
+
+func denormalizeWeather(row string) (*Weather, error) {
+	columns := strings.Split(row, " ")
+
+	if len(columns) < 2 {
+		return nil, errors.New("Could not parse column")
+	}
+
+	day, err := strconv.Atoi(columns[0])
+
+	if err != nil {
+		return nil, errors.New("Could not parse day")
+	}
+
+	maxTemp, err := strconv.Atoi(columns[1])
+
+	if err != nil {
+		return nil, errors.New("Could not parse maxTemp")
+	}
+
+	minTemp, err := strconv.Atoi(columns[2])
+
+	if err != nil {
+		return nil, errors.New("Could not parse minTemp")
+	}
+
+	return &Weather{day: day, maxTemp: maxTemp, minTemp: minTemp}, nil
+}
+
+type Weather struct {
+	day     int
+	maxTemp int
+	minTemp int
 }
