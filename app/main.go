@@ -20,15 +20,17 @@ func main() {
 
 	scanner := bufio.NewScanner(file)
 
+	var weathers []Weather
+
 	for scanner.Scan() {
 		row := strings.Join(strings.Fields(scanner.Text()), " ")
 
 		if weatherPtr, err := denormalizeWeather(row); err == nil {
-			weather := *weatherPtr
-
-			fmt.Println(weather)
+			weathers = append(weathers, *weatherPtr)
 		}
 	}
+
+	fmt.Println(weathers)
 }
 
 func denormalizeWeather(row string) (*Weather, error) {
