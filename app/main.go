@@ -20,17 +20,27 @@ func main() {
 
 	scanner := bufio.NewScanner(file)
 
-	var weathers []Weather
+	var smallestSpreadPtr *Weather
 
 	for scanner.Scan() {
 		row := strings.Join(strings.Fields(scanner.Text()), " ")
 
 		if weatherPtr, err := denormalizeWeather(row); err == nil {
-			weathers = append(weathers, *weatherPtr)
+			if smallestSpreadPtr == nil {
+				smallestSpreadPtr = weatherPtr
+
+				continue
+			}
+
+			if weather := *weatherPtr; weather.spread < smallestSpreadPtr.spread {
+				smallestSpreadPtr = &weather
+			}
 		}
 	}
 
-	fmt.Println(weathers)
+	smallestSpread := *smallestSpreadPtr
+
+	fmt.Println(smallestSpread)
 }
 
 func denormalizeWeather(row string) (*Weather, error) {
@@ -58,11 +68,10 @@ func denormalizeWeather(row string) (*Weather, error) {
 		return nil, errors.New("Could not parse minTemp")
 	}
 
-	return &Weather{day: day, maxTemp: maxTemp, minTemp: minTemp}, nil
+	return &Weather{day: day, spread: maxTemp - minTemp}, nil
 }
 
 type Weather struct {
-	day     int
-	maxTemp int
-	minTemp int
+	day    int
+	spread int
 }
