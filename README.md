@@ -21,9 +21,9 @@ cd data-munging-kata-go
 
 # Start up Docker
 
-docker-compose up -d --build
+docker compose up -d --build
 
-docker exec -it api /bin/zsh
+docker exec -it app /bin/zsh
 
 # Inside the shell
 
