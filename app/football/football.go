@@ -38,19 +38,27 @@ func denormalize(data []string) (*TeamScore, error) {
 		return nil, errors.New("Could not parse column")
 	}
 
-	score, err := strconv.Atoi(data[6])
+	forScore, err := strconv.Atoi(data[6])
 
 	if err != nil {
-		return nil, errors.New("Could not parse maxTemp")
+		return nil, errors.New("Could not parse forScore")
 	}
 
-	against, err := strconv.Atoi(data[8])
+	againstScore, err := strconv.Atoi(data[8])
 
 	if err != nil {
-		return nil, errors.New("Could not parse minTemp")
+		return nil, errors.New("Could not parse againstScore")
 	}
 
-	return &TeamScore{name: data[1], spread: score - against}, nil
+	var spread int
+
+	if forScore > againstScore {
+		spread = forScore - againstScore
+	} else {
+		spread = againstScore - forScore
+	}
+
+	return &TeamScore{name: data[1], spread: spread}, nil
 }
 
 type TeamScore struct {
