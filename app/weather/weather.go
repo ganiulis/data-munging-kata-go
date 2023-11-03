@@ -1,15 +1,14 @@
-package main
+package weather
 
 import (
 	"bufio"
 	"errors"
-	"fmt"
 	"os"
 	"strconv"
 	"strings"
 )
 
-func OutputSmallestSpread(file *os.File) {
+func GetSmallestSpread(file *os.File) int {
 	scanner := bufio.NewScanner(file)
 
 	var selectedEntry *WeatherEntry
@@ -31,7 +30,7 @@ func OutputSmallestSpread(file *os.File) {
 		}
 	}
 
-	fmt.Printf("Smallest spread is on day %d.\n", selectedEntry.day)
+	return selectedEntry.day
 }
 
 func denormalize(data []string) (*WeatherEntry, error) {

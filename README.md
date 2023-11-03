@@ -29,11 +29,11 @@ go run main.go
 
 # Stop the container
 
-docker compose down
+docker compose stop
 
 # Start the container without rebuilding it
 
-docker compose up -d
+docker compose start
 
 ```
 
