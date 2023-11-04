@@ -1,9 +1,9 @@
-# data-munging-kata-go
+# Data Munging Kata in Go
 Data Munging exercise written in Go. Found at http://codekata.com/kata/kata04-data-munging/.
 
 # Installation
 ## Prerequisites
-You'll need some apps:
+You'll need some tools:
 1. git
 2. Docker (with Docker Compose)
 
@@ -48,6 +48,8 @@ I could copy the primary flow up until the difference comparison, which required
 Depends. If unsure it's better to err on the side of refactoring it out. I use the rule of three: if code repeats three times it's probably a good idea to put it together. However there's cases where code is similar in a superficial way such as in domain logic where it should be left separate. Haven't found much cases for it, though.
 
 Readability did not suffer much provided the abstraction is sane enough to be understood.
+
+I think it's maintainable. Then again it's a small app which helps a lot with maintainability.
 
 # Sources
 My gratitude goes to these articles and docs:
