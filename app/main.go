@@ -1,18 +1,24 @@
 package main
 
 import (
-	"app/football"
-	"app/weather"
+	"app/parser"
 	"fmt"
-	"os"
+	"path/filepath"
 )
 
+const WeatherDataPath = "../data/weather.dat"
+const FootballDataPath = "../data/football.dat"
+
 func main() {
-	if file, err := os.Open("../data/weather.dat"); err == nil {
-		fmt.Printf("Smallest weather spread is on day %d.\n", weather.GetSmallestSpread(file))
+	if absoluteFilepath, err := filepath.Abs(WeatherDataPath); err == nil {
+		fmt.Printf("Day: %s.\n", parser.FindSmallestDifference(absoluteFilepath, 0, 1, 2))
+	} else {
+		panic(err)
 	}
 
-	if file, err := os.Open("../data/football.dat"); err == nil {
-		fmt.Printf("Smallest football spread is by %s.\n", football.GetSmallestSpreadTeam(file))
+	if absoluteFilepath, err := filepath.Abs(FootballDataPath); err == nil {
+		fmt.Printf("Team: %s.\n", parser.FindSmallestDifference(absoluteFilepath, 1, 6, 8))
+	} else {
+		panic(err)
 	}
 }
