@@ -57,4 +57,6 @@ My gratitude goes to these articles and docs:
 2. https://betterprogramming.pub/naming-conventions-in-go-short-but-descriptive-1fa7c6d2f32a?gi=2b021845ccf8
 3. https://go.dev/doc/effective_go
 4. https://askgolang.com/how-to-get-absolute-path-in-golang/
+5. https://medium.com/@adiach3nko/package-management-with-go-modules-the-pragmatic-guide-c831b4eaaf31
+
 
